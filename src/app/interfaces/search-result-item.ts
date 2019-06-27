@@ -1,15 +1,19 @@
 export class SearchResultItem {
 
+    keyword: string;
     title: string;
     view_count: number;
     creation_date: number;
     answer_count: number;
 
-    constructor(data: { title: string, creation_date: number, view_count: number, answer_count: number }) {
+    constructor(data: {
+        title: string, creation_date: number, view_count: number, answer_count: number, keyword: string
+    }) {
         this.title = data.title;
         this.view_count = data.view_count;
         this.creation_date = data.creation_date;
         this.answer_count = data.answer_count;
+        this.keyword = data.keyword;
     }
 }
 

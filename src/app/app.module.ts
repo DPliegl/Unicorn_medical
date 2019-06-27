@@ -18,6 +18,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
+import { RootStoreModule } from './root-store/root-store.module';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,7 +35,8 @@ import { far } from '@fortawesome/free-regular-svg-icons';
         HttpClientModule,
         LayoutModule,
         AppRoutingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        RootStoreModule
     ],
     entryComponents: [WeatherDataListItemComponent, SearchResultListItemComponent],
     providers: [SearchService],

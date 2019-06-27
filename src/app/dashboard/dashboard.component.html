@@ -1,11 +1,15 @@
+<div *ngIf="!(isLoading$ | async) else loading" class="list-container">
 
-<div class="list-container">
+    <ae-dashboard-list [listItems]="typescriptData$ | async" [title]="'Typescript'"></ae-dashboard-list>
 
-  <ae-dashboard-list [listItems]="typescriptData" [title]="'Typescript'"></ae-dashboard-list>
+    <ae-dashboard-list [listItems]="angularData$ | async" [title]="'Angular2'"></ae-dashboard-list>
 
-  <ae-dashboard-list [listItems]="angularData" [title]="'Angular2'"></ae-dashboard-list>
-
-  <ae-dashboard-list [listItems]="weatherData" [title]="'Weather'"></ae-dashboard-list>
+    <ae-dashboard-list [listItems]="weatherData$ | async" [title]="'Weather'"></ae-dashboard-list>
 
 </div>
 
+<ng-template #loading>
+
+    Loading...
+
+</ng-template>

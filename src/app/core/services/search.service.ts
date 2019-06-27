@@ -24,14 +24,14 @@ export class SearchService {
             title: item.title,
             creation_date: item.creation_date,
             view_count: item.view_count,
-            answer_count: item.answer_count
+            answer_count: item.answer_count,
+            keyword: keyword
         })));
     }
 
     search(keyword: string): Observable<Array<SearchResultItem>> {
         return this.http.get<ISearchResult>(SearchService.apiUrl + keyword).pipe(
             map((res: ISearchResult) => {
-                console.log(res);
                 console.log(`API USAGE: ${res.quota_remaining} of ${res.quota_max} requests available`);
                 return res.items
                     .map((item: ISearchResultItem) => new SearchResultItem(
@@ -39,26 +39,27 @@ export class SearchService {
                             title: item.title,
                             creation_date: item.creation_date,
                             view_count: item.view_count,
-                            answer_count: item.answer_count
+                            answer_count: item.answer_count,
+                            keyword: keyword
                         }));
             })
         )
     }
 
     getWeatherData(): Observable<Array<WeatherData>> {
-        return of(WeatherDataJson.slice(0, 10).map((item: IWeatherData) =>  new WeatherData({
-                    date: item.Datum,
-                    wind: item.Wind,
-                    direction: item.Richtung,
-                    humidity: item['Feuchte A.'],
-                    brightness: item.Helligkeit,
-                    air_pressure: item.Luftdruck,
-                    temperature_a: item['Temp. A.'],
-                    temperature_3: item['Temp. 3'],
-                    rain: item.Regen,
-                    time: item.Zeit
-                })
-        )
+        return of(WeatherDataJson.slice(0, 10).map((item: IWeatherData) => new WeatherData({
+                date: item.Datum,
+                wind: item.Wind,
+                direction: item.Richtung,
+                humidity: item['Feuchte A.'],
+                brightness: item.Helligkeit,
+                air_pressure: item.Luftdruck,
+                temperature_a: item['Temp. A.'],
+                temperature_3: item['Temp. 3'],
+                rain: item.Regen,
+                time: item.Zeit
+            })
+            )
         );
     }
 

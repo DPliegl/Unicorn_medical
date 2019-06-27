@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { SearchService } from '../core/services/search.service';
-import { of } from 'rxjs';
+import { combineReducers, StoreModule } from '@ngrx/store';
 
+import * as fromWeatherData from '../root-store/weather-data';
+import * as fromSearchData from '../root-store/search-data';
 
-class StubSearchService {
-    searchMockData = jasmine.createSpy('searchMockData').and.returnValue(of([]));
-    search = jasmine.createSpy('search').and.returnValue(of([]));
-    getWeatherData = jasmine.createSpy('getWeatherData').and.returnValue(of([]));
-}
+const reducersMap = {
+    'weather-data': fromWeatherData.Reducers.featureReducer,
+    'search-data': fromSearchData.Reducers.featureReducer
+};
+const rootReducer = combineReducers(reducersMap, {});
+const initialState = rootReducer(undefined, {type: ''});
 
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
@@ -19,7 +21,7 @@ describe('DashboardComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DashboardComponent],
-            providers: [{provide: SearchService, useClass: StubSearchService}],
+            imports: [StoreModule.forRoot(reducersMap, {initialState: initialState})],
             schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();

@@ -25,6 +25,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-regular-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@ngrx/effects": "^8.0.1",
+    "@ngrx/entity": "^8.0.1",
+    "@ngrx/router-store": "^8.0.1",
+    "@ngrx/store": "^8.0.1",
+    "@ngrx/store-devtools": "^8.0.1",
+    "angular2-uuid": "^1.1.1",
     "core-js": "^3.1.4",
     "rxjs": "^6.5.2",
     "zone.js": "^0.9.1"
