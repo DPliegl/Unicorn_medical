@@ -1,0 +1,21 @@
+<h2>{{title}}</h2>
+
+<div class="list-item-container">
+
+    <div class="list-item" *ngFor="let listItem of listItems">
+
+        <ng-container *ngIf="isWeatherData(listItem)">
+
+            <ae-weather-data-item [data]="listItem"></ae-weather-data-item>
+
+        </ng-container>
+
+        <ng-container *ngIf="isSearchResultItem(listItem)">
+
+            <ae-search-result-list-item [data]="listItem"></ae-search-result-list-item>
+
+        </ng-container>
+
+    </div>
+
+</div>

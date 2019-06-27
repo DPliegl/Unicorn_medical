@@ -1,0 +1,30 @@
+
+
+.item-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item{
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.item p {
+  margin-left: 3px;
+}
+
+.card-footer {
+  font-size: 12px;
+}
+
+
+.icon{
+  float: left;
+  padding: 15px 0 0 5px;
+}
+
+fa-icon {
+  font-size: 32px;
+}

@@ -1,0 +1,41 @@
+<ng-container *ngIf="data">
+
+    <div class="icon">
+        <fa-icon [icon]="['fas', 'cloud-sun']"></fa-icon>
+    </div>
+
+    <div class="item-container">
+        <div class="item">
+            <p>Helligkeit:</p>
+            <p>{{data.brightness}}</p>
+        </div>
+
+        <div class="item">
+            <p>Luftdruck:</p>
+            <p>{{data.air_pressure}}</p>
+        </div>
+
+        <div class="item">
+            <p>Regen:</p>
+            <p>{{data.rain}}</p>
+        </div>
+
+        <div class="item">
+            <p>Richtung:</p>
+            <p>{{data.direction}}</p>
+        </div>
+
+        <div class="item">
+            <p>Wind:</p>
+            <p>{{data.wind}}</p>
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+
+        <span>Datum: {{ data.date}} </span>
+
+    </div>
+
+</ng-container>

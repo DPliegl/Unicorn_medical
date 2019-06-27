@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 export class UnicornMedicalPage {
   navigateTo() {
@@ -6,6 +6,6 @@ export class UnicornMedicalPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('ae-root h1')).getText();
   }
 }

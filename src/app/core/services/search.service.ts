@@ -1,44 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/internal/operators';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-
-export interface ISearchResultItem {
-  answer_count: number;
-  closed_date: number;
-  closed_reason: string;
-  creation_date: number;
-  is_answered: boolean;
-  last_activity_date: number;
-  link: string;
-  score: number;
-  tags: Array<string>;
-  title: string;
-  view_count: number;
-}
+import WeatherDataJson from './weatherdata.json';
+import MockData from './mock.json';
+import { ISearchResultItem, SearchResultItem } from '../../interfaces/search-result-item';
+import { ISearchResult } from '../../interfaces/search-result';
+import { IWeatherData, WeatherData } from '../../interfaces/weather-data';
 
 @Injectable()
 export class SearchService {
 
-  private static readonly apiUrl =
-    'https://api.stackexchange.com/2.2/search?pagesize=20&order=desc&sort=activity&site=stackoverflow&intitle=';
+    private static readonly apiUrl =
+        'https://api.stackexchange.com/2.2/search?pagesize=20&order=desc&sort=activity&site=stackoverflow&intitle=';
 
-  constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) {
 
-  }
+    }
 
-  search(keyword: string): Observable<any> {
-    return this.http.get(SearchService.apiUrl + keyword).pipe(
-      map((res: HttpResponse<any>) => {
-        const data = res.body;
-        console.log(`API USAGE: ${data.quota_remaining} of ${data.quota_max} requests available`);
-        return data;
-      }),
-      catchError((err: HttpErrorResponse) => of({error: err.message}))
-    )
-  }
+    searchMockData(keyword: string): Observable<Array<SearchResultItem>> {
+        return of(MockData.slice(0, 10).map((item: any) => new SearchResultItem({
+            title: item.title,
+            creation_date: item.creation_date,
+            view_count: item.view_count,
+            answer_count: item.answer_count
+        })));
+    }
+
+    search(keyword: string): Observable<Array<SearchResultItem>> {
+        return this.http.get<ISearchResult>(SearchService.apiUrl + keyword).pipe(
+            map((res: ISearchResult) => {
+                console.log(res);
+                console.log(`API USAGE: ${res.quota_remaining} of ${res.quota_max} requests available`);
+                return res.items
+                    .map((item: ISearchResultItem) => new SearchResultItem(
+                        {
+                            title: item.title,
+                            creation_date: item.creation_date,
+                            view_count: item.view_count,
+                            answer_count: item.answer_count
+                        }));
+            })
+        )
+    }
+
+    getWeatherData(): Observable<Array<WeatherData>> {
+        return of(WeatherDataJson.slice(0, 10).map((item: IWeatherData) =>  new WeatherData({
+                    date: item.Datum,
+                    wind: item.Wind,
+                    direction: item.Richtung,
+                    humidity: item['Feuchte A.'],
+                    brightness: item.Helligkeit,
+                    air_pressure: item.Luftdruck,
+                    temperature_a: item['Temp. A.'],
+                    temperature_3: item['Temp. 3'],
+                    rain: item.Regen,
+                    time: item.Zeit
+                })
+        )
+        );
+    }
 
 
 }

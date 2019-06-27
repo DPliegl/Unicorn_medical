@@ -1,0 +1,31 @@
+@import "../../styles";
+
+:host  {
+  margin: 5px;
+  background-color: white;
+}
+
+h2{
+  text-align: center;
+}
+
+.list-item-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+}
+
+.list-item{
+  box-shadow: $tile-shadow;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 400px;
+  min-width: 300px;
+  background-color: white;
+  -webkit-column-break-inside: avoid;
+  padding: 5px;
+  margin: 5px;
+  box-sizing: border-box;
+}

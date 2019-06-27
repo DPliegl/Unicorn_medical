@@ -1,0 +1,22 @@
+<ng-container *ngIf="data">
+    <div class="icon">
+        <fa-icon [icon]="['fas', 'question']"></fa-icon>
+    </div>
+
+    <div class="card">
+
+        <div class="card-content">
+            {{data.title}}
+        </div>
+
+        <div class="card-footer">
+
+            <span>Datum: {{ (data.creation_date * 1000) | date}} </span>
+
+            <span class="float-right"> Antworten: {{(data.answer_count) }}  | Ansichten: {{data.view_count}}</span>
+
+        </div>
+
+    </div>
+
+</ng-container>
